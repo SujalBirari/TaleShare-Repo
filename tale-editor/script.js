@@ -39,6 +39,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- Download Tale ---
+    function downloadTale() {
+        const title = titleInput.value.trim() || 'Untitled Tale';
+        const content = editor.value;
+
+        // Create the file content (Title + 2 newlines + content)
+        const fileContent = `${title}\n\n${content}`;
+
+        // Create a blob
+        const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+
+        // Create a temporary link to trigger the download
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+
+        // Sanitize title for filename
+        const safeFilename = title.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        a.download = `${safeFilename}.txt`;
+
+        // Trigger download
+        document.body.appendChild(a);
+        a.click();
+
+        // Clean up
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+    }
+
 
     // --- Event Listeners ---
 
@@ -52,6 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial word count check on load
     updateEditor();
+
+    // Trigger download on button click
+    downloadBtn.addEventListener('click', downloadTale);
 
     console.log('TaleShare Editor v0.1 Initialized.');
 });
