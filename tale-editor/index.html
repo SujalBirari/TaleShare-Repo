@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a New Tale - TaleShare</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Load Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Main Application Container -->
+    <div class="flex flex-col min-h-screen">
+
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-10">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo / Brand -->
+                    <div class="flex-shrink-0 flex items-center">
+                        <svg class="h-8 w-auto text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 12.572l-4.5-4.5m0 0l-4.5 4.5m4.5-4.5v11.127a1.875 1.875 0 01-1.875 1.875H9.75a1.875 1.875 0 01-1.875-1.875V8.072m3.75 0l-4.5 4.5m4.5-4.5l4.5 4.5m-4.5-4.5V3.187m0 0A1.875 1.875 0 009.75 1.312h-3.188a1.875 1.875 0 00-1.875 1.875v3.188C4.688 7.028 5.47 7.5 6.438 7.5H7.5m3-3.75l-4.5 4.5" />
+                        </svg>
+                        <span class="ml-2 text-2xl font-bold text-gray-800">TaleShare</span>
+                    </div>
+
+                    <!-- Right-side actions -->
+                    <div class="flex items-center">
+                        <span class="text-sm text-gray-500 mr-6" id="word-count-display">Word Count: 0</span>
+                        <!-- US 3: Download Button -->
+                        <button id="download-btn"
+                            class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            Download Tale
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content: The Editor -->
+        <main class="flex-1 flex overflow-hidden">
+            <!-- This container will handle the scrolling of the textarea -->
+            <div class="flex-1 overflow-y-auto p-4 editor-container" id="editor-scroll-container">
+                <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 md:p-12 lg:p-16 min-h-full">
+
+                    <!-- Tale Title Input -->
+                    <input type="text" id="tale-title" placeholder="Your Tale's Title..."
+                        class="w-full text-3xl md:text-4xl mb-6 pb-2 border-b-2 border-gray-200 focus:border-indigo-500 focus:outline-none" />
+
+                    <!-- The Writing Area -->
+                    <textarea id="tale-editor"
+                        class="w-full h-auto min-h-[70vh] editor-textarea focus:outline-none focus:ring-0"
+                        placeholder="Once upon a time..."></textarea>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer (simple) -->
+        <footer class="bg-gray-800 text-gray-400 py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+                TaleShare v0.1 - The Journey Begins
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
