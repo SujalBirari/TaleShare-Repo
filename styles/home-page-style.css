@@ -1,0 +1,9 @@
+/* Use Inter as the default font */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Custom gradient for hero */
+.hero-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+}
