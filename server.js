@@ -4,6 +4,7 @@ require('dotenv').config()
 
 const dbConnect = require('./config/db');
 const authRoutes = require('./routes/auth');
+const taleRoutes = require('./routes/tales');
 
 // Establish connection with the database
 dbConnect();
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use('/api/auth', authRoutes);
+app.use('/api/tales', taleRoutes);
 
 // DEFINE ROUTES
 app.get('/', (req, res) => {

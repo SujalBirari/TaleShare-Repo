@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const editor = document.getElementById('tale-editor');
     const wordCountDisplay = document.getElementById('word-count-display');
     const downloadBtn = document.getElementById('download-btn');
+    const saveBtn = document.getElementById('save-btn');
 
     const TITLE_STORAGE_KEY = 'taleShare_editor_title';
     const CONTENT_STORAGE_KEY = 'taleShare_editor_content';
@@ -67,12 +68,67 @@ document.addEventListener('DOMContentLoaded', () => {
         URL.revokeObjectURL(a.href);
     }
 
+    // --- Save Tale to Database ---
+    async function saveTale() {
+        // Get the token from localStorage
+        const token = localStorage.getItem('token');
+
+        // Get the content
+        const title = titleInput.value;
+        const content = editor.value;
+
+        // Check for token
+        if (!token) {
+            alert('You must be logged in to save your work.');
+            // Redirect to login, as the user shouldn't be here 
+            return;
+        }
+
+        // Check for content
+        if (!content.trim()) {
+            alert('Cannot save an empty tale.');
+            return;
+        }
+
+        try {
+            // Send the data to the protected API
+            const response = await fetch('/api/tales', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': token
+                },
+                body: JSON.stringify({ title, content })
+            });
+
+            if (!response.ok) {
+                // Handle errors from the server 
+                const errData = await response.json();
+                throw new Error(errData.msg || 'Failed to save tale.');
+            }
+
+            // Success!
+            const savedTale = await response.json();
+            alert('Tale saved successfully!');
+
+            // store the new 'tale._id' for future updates
+            console.log('Tale saved with ID:', savedTale._id);
+
+        } catch (err) {
+            console.error('Save failed:', err);
+            alert(`Error: ${err.message}`);
+            if (err.message.includes('authorization denied') || err.message.includes('not valid')) {
+                // If token is bad, log them out
+                localStorage.removeItem('token');
+                window.location.href = '/login';
+            }
+        }
+    }
 
     // --- Event Listeners ---
 
     // Update word count and save on every input
     titleInput.addEventListener('input', updateEditor);
-    // --- FIX 2: Removed stray text "Example Story" ---
     editor.addEventListener('input', updateEditor);
 
     // Load content when the page is ready
@@ -83,6 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Trigger download on button click
     downloadBtn.addEventListener('click', downloadTale);
+
+    saveBtn.addEventListener('click', saveTale);
 
     console.log('TaleShare Editor v0.1 Initialized.');
 });
