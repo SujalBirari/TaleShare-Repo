@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('token', data.token);
 
                     // Redirect to the editor page
-                    window.location.href = '/editor';
+                    window.location.href = '/my-tales';
                 } else {
                     throw new Error('No token received. Please try again.');
                 }

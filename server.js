@@ -38,6 +38,9 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('login'); // Renders views/login.ejs
 });
+app.get('/my-tales', (req, res) => {
+    res.render('my-tales'); // Renders views/my-tales.ejs
+});
 
 // Start server
 app.listen(PORT, () => {

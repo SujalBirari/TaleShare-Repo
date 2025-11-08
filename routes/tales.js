@@ -26,4 +26,18 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
+router.get('/', auth, async (req, res) => {
+    const userId = req.user.userId;
+
+    try {
+        let userTales = await Tale.find({ user: userId }).sort({ createdDate: -1 });
+
+        res.json(userTales);
+    }
+    catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
