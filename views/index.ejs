@@ -36,11 +36,21 @@
 
                 <!-- Right-side actions (Future) -->
                 <div class="flex items-center space-x-4">
-                    <a href="#" class="text-sm font-medium text-gray-600 hover:text-indigo-600">Login</a>
-                    <a href="#"
-                        class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                        Sign Up
-                    </a>
+
+                    <div id="guest-links" class="flex items-center space-x-4">
+                        <a href="/login" class="text-sm font-medium text-gray-600 hover:text-indigo-600">Login</a>
+                        <a href="/register"
+                            class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            Sign Up
+                        </a>
+                    </div>
+
+                    <div id="user-links" class="hidden items-center space-x-4"> <button id="logout-button"
+                            class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                            Logout
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </nav>
@@ -277,6 +287,8 @@
         </div>
     </footer>
 
+    <script src="/scripts/auth-ui.js" defer></script>
+    <script src="/scripts/home-page-script.js"></script>
 </body>
 
 </html>
