@@ -30,6 +30,10 @@ app.get('/editor', (req, res) => {
     res.render('tale-editor');
 });
 
+app.get('/register', (req, res) => {
+    res.render('register'); // Renders views/register.ejs
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
