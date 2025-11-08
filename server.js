@@ -33,6 +33,9 @@ app.get('/editor', (req, res) => {
 app.get('/register', (req, res) => {
     res.render('register'); // Renders views/register.ejs
 });
+app.get('/login', (req, res) => {
+    res.render('login'); // Renders views/login.ejs
+});
 
 // Start server
 app.listen(PORT, () => {
