@@ -43,22 +43,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
             // Loop through each tale and create a "card" for it
             tales.forEach(tale => {
-                const taleCard = document.createElement('div');
-                taleCard.className = 'bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200';
+                // Change from 'div' to 'a'
+                const taleCard = document.createElement('a');
 
-                // Create a snippet of the content (e.g., first 100 characters)
+                // Add the link to the editor with the tale's ID
+                taleCard.href = `/editor?id=${tale._id}`;
+
+                // Add classes (it will look the same as before)
+                taleCard.className = 'block bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200'; // Added 'block'
+
+                // ... (snippet and date logic is the same) ...
                 const snippet = tale.content.substring(0, 100) + (tale.content.length > 100 ? '...' : '');
+                const date = new Date(tale.createdDate).toLocaleDateString(/* ... */);
 
-                // Format the date
-                const date = new Date(tale.createdDate).toLocaleDateString('en-US', {
-                    year: 'numeric', month: 'long', day: 'numeric'
-                });
-
+                // Set the inner HTML
                 taleCard.innerHTML = `
-                    <h2 class="text-xl font-bold text-gray-900 mb-2">${tale.title || 'Untitled Tale'}</h2>
-                    <p class="text-gray-600 mb-4 line-clamp-3">${snippet}</p>
-                    <p class="text-sm text-gray-400">Saved on: ${date}</p>
-                    `;
+                <h2 class="text-xl font-bold text-gray-900 mb-2">${tale.title || 'Untitled Tale'}</h2>
+                <p class="text-gray-600 mb-4 line-clamp-3">${snippet}</p>
+                <p class="text-sm text-gray-400">Saved on: ${date}</p>`;
 
                 talesListContainer.appendChild(taleCard);
             });
