@@ -100,4 +100,32 @@ router.put('/:id', auth, async (req, res) => {
     }
 });
 
+router.delete('/:id', auth, async (req, res) => {
+    try {
+        // 1. Find the tale by its ID
+        let tale = await Tale.findById(req.params.id);
+
+        if (!tale) {
+            return res.status(404).json({ msg: 'Tale not found' });
+        }
+
+        // 2. Security Check: Make sure the logged-in user owns this tale
+        if (tale.user.toString() !== req.user.userId) {
+            return res.status(401).json({ msg: 'Not authorized' });
+        }
+
+        // 3. Delete the tale
+        await Tale.findByIdAndDelete(req.params.id);
+
+        res.json({ msg: 'Tale removed' }); // Send back a success message
+
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind === 'ObjectId') {
+            return res.status(404).json({ msg: 'Tale not found' });
+        }
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
