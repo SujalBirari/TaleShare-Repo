@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 require('dotenv').config()
+const morgan = require('morgan')
 
 const dbConnect = require('./config/db');
 const authRoutes = require('./routes/auth');
@@ -21,6 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'));
 app.use('/api/auth', authRoutes);
 app.use('/api/tales', taleRoutes);
 
