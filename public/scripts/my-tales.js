@@ -65,13 +65,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             loadingMessage.remove();
         }
 
+        // 8. Render the tales
         if (tales.length === 0) {
-            talesListContainer.innerHTML = '<p class="text-gray-500">You haven\'t saved any tales yet. <a href="/editor" class="text-indigo-600 hover:underline">Start writing!</a></p>';
+            // Show a message if the user has no tales (with dark mode classes)
+            talesListContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400">You haven\'t saved any tales yet. <a href="/editor" class="text-indigo-600 hover:underline dark:text-indigo-400 dark:hover:text-indigo-300">Start writing!</a></p>';
         } else {
+            // Loop through each tale and create a "card" for it
             tales.forEach(tale => {
-                // We create a 'div' again, as the link is now just for editing
                 const taleCard = document.createElement('div');
-                taleCard.className = 'bg-white p-6 rounded-lg shadow-md flex flex-col justify-between';
+
+                // Add dark mode class for the card background
+                taleCard.className = 'bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md flex flex-col justify-between';
 
                 // We add a data attribute to store the ID
                 taleCard.setAttribute('data-tale-id', tale._id);
@@ -81,19 +85,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                     year: 'numeric', month: 'long', day: 'numeric'
                 });
 
-                // --- (MODIFIED) Card HTML with Edit and Delete buttons ---
+                // --- Card HTML with ALL dark mode classes added ---
                 taleCard.innerHTML = `
                     <div>
-                        <h2 class="text-xl font-bold text-gray-900 mb-2">${tale.title || 'Untitled Tale'}</h2>
-                        <p class="text-gray-600 mb-4 line-clamp-3">${snippet}</p>
+                        <h2 class="text-xl font-bold text-gray-900 mb-2 dark:text-gray-100">${tale.title || 'Untitled Tale'}</h2>
+                        <p class="text-gray-600 mb-4 line-clamp-3 dark:text-gray-400">${snippet}</p>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-400 mb-4">Saved on: ${date}</p>
+                        <p class="text-sm text-gray-400 mb-4 dark:text-gray-500">Saved on: ${date}</p>
                         <div class="flex items-center space-x-2">
-                            <a href="/editor?id=${tale._id}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Edit</a>
-                            <span class="text-gray-300">|</span>
+                            <a href="/editor?id=${tale._id}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">Edit</a>
+                            <span class="text-gray-300 dark:text-gray-600">|</span>
                             
-                            <button data-action="delete" class="text-sm font-medium text-red-600 hover:text-red-800">
+                            <button data-action="delete" class="text-sm font-medium text-red-600 hover:text-red-800 dark:text-red-500 dark:hover:text-red-400">
                                 Delete
                             </button>
                         </div>
