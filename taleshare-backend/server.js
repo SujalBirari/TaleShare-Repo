@@ -19,10 +19,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
-app.use(cors({
-    origin: 'http://localhost:5173',
-    allowedHeaders: ['Content-Type', 'x-auth-token']
-}));
+// app.use(cors({
+//     origin: 'http://localhost:5173',
+//     allowedHeaders: ['Content-Type', 'x-auth-token']
+// }));
+app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/tales', taleRoutes);
 
